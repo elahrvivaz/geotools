@@ -189,16 +189,17 @@ public class ExpressionToText implements ExpressionVisitor {
             output = dateToText( period.getBeginning().getPosition().getDate(), output );
             output.append("/");
     		output = dateToText( period.getEnding().getPosition().getDate(), output );
-    		
+
     		return output;
-        }
-        else {
+        } else if (literal instanceof Boolean) {
+            output.append(literal);
+        } else {
             String escaped = literal.toString().replaceAll("'", "''");
             output.append("'" + escaped + "'");
         }
         return output;
 	}
-	
+
 
 	/* (non-Javadoc)
 	 * @see org.opengis.filter.expression.ExpressionVisitor#visit(org.opengis.filter.expression.Multiply, java.lang.Object)
